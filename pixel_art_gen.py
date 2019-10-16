@@ -1,16 +1,16 @@
 from PIL import Image
 import os
 
-def merge_pixels(s1, s2):
+def merge_pixels(s1, s2,w):
     new_values = []
     R = 0
     G = 0
     B = 0
 
-    for w in range(0,10):
+    for k in range(0,10):
         for h in range(s1,s1+10):
             new_values.append(pixel_values[h])
-        s1 += 300
+        s1 += w
 
     for i in new_values:
         R += i[0]
@@ -23,25 +23,23 @@ def merge_pixels(s1, s2):
 
     avg = (R,G,B)
 
-    for w in range(0,10):
+    for k in range(0,10):
         for h in range(s2,s2+10):
             pixel_values[h] = avg
-        s2 += 300
+        s2 += w
 
 if __name__ == "__main__":
-    img = Image.open('bird.jpg')
+    img = Image.open('zelda.jpg')
     pixel_values = list(img.getdata())
     width,height = img.size
     cs = 0
     rows = height//10 + 1
     columns = width//10
     row_width = width*10
-    file_types = [".jpg", ".png"]
-
 
     for r in range(1,rows):
         for c in range(0,columns):
-            merge_pixels(cs,cs)
+            merge_pixels(cs,cs,width)
             cs+= 10
         cs = r*row_width
 
